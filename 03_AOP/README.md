@@ -29,3 +29,54 @@
 - 프록시는 대상 객체의 메소드 호출을 가로채어 어드바이스를 수행하고 대상 객체의 메소드를 호출하거나 대상 객체의 메소드를 호출 후 어드바이스를 수행한다.
 
 <img src="https://user-images.githubusercontent.com/26870393/182384317-9e023b61-0ad4-4f19-9f19-3f84fd3bb77c.png">
+
+## Spring AOP 구현 방법
+
+### XML 기반의 AOP 구현
+
+- 스프링의 AOP 네임스페이스를 사용하여 빈을 애스펙트로 전환할 수 있다.
+
+## Spring AOP 구현 방법
+- AspectJ 애노테이션을 적용을 위해서는 설정 파일에 아래와 같이 프록시 설정을 해야 한다.
+
+```xml
+<beans>
+    <aop:aspectj-autoproxy/>
+</beans>
+```
+
+- AspectJ의 애노테이션을 사용하여 애스펙트를 생성할 수 있다.
+
+```java
+
+@Aspect
+@Componect
+public class 클래스명 {
+
+    @Before("포인트컷 지정자")
+    public void before() {
+        // 메소드 실행 전에 적용되는 어드바이스를 정의
+    }
+
+    @After("포인트컷 지정자")
+    public void after() {
+        // 메소드 실행 후에 적용되는 어드바이스를 정의
+    }
+
+    @AfterReturning("포인트컷 지정자")
+    public void success() {
+        // 메소드가 정상적으로 실행된 후에 적용되는 어드바이스를 정의
+    }
+
+    @AfterThrowing("포인트컷 지정자")
+    public void fail() {
+        // 메소드가 예외를 발생시킬 때 적용되는 어드바이스를 정의
+    }
+
+    @Around("포인트컷 지정자")
+    public String around(ProceedingJoinPoint joinPoint) {
+        // 메소드 호출 이전, 이후, 예외 발생 등 모든 시점에 적용 가능한 어드바이스를 정의
+    }
+    
+}
+```
