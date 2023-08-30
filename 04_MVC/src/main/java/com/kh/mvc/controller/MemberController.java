@@ -31,11 +31,16 @@ public class MemberController {
 	@RequestMapping("find")
 	public String find(String keyword, Model model) {
 		// getParameter 부분이 필요가 없음
-		// System.out.println(keyword); 
 		// 서비스 - 비즈니스 로직 처리!
 		// --> list 값! 데이터 바인딩 -> Model!
 		// model.addAttribute("list", list);
-		return "find_ok"; // 없으면 "find_fail"
+		List<Member> list = service.findMember(keyword);
+		
+		if(list.size()>0) {
+			model.addAttribute("list", list);
+			return "find_ok";
+		}
+		return "find_fail";
 	}
 	
 	// <회원가입>
@@ -65,21 +70,12 @@ public class MemberController {
 	// signIn - 비즈니스 로직 포함 : 파라미터 값 -> HttpServletRequest request
 	// -> return "login_result"
 	@RequestMapping("signIn")
-	public String singIn(HttpServletRequest request) {
-		String id= request.getParameter("id");
-		String pwd = request.getParameter("pwd");
-		
-		Member member = new Member();
-		member.setId(id);
-		member.setPwd(pwd);
-		
-		Member vo = new Member();
-		vo = service.login(member);
-		
+	public String singIn(Member vo, HttpServletRequest request) {
+		Member member = service.login(vo);
 		HttpSession session = request.getSession();
 		
-		if(vo!=null) {
-			session.setAttribute("vo", vo);
+		if(member!=null) {
+			session.setAttribute("vo", member);
 		}
 		
 		return "login_result";
@@ -97,9 +93,8 @@ public class MemberController {
 	}
 	
 	// logout - 로그아웃 기능!
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
 		if(session.getAttribute("vo")!=null) {
 			session.invalidate();
 		}
@@ -114,12 +109,12 @@ public class MemberController {
 	
 	// updateMember - 비즈니스 로직 포함 -> 파라미터 request 필요
 	@RequestMapping("updateMember")
-	public String updateMember(HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		
-		
-		
+	public String updateMember(Member vo,HttpSession session) {
+		service.updateMember(vo);
+		if(session.getAttribute("vo")!=null) {
+			session.setAttribute("vo", vo);
+		}
+		return "redirect:/";
 	}
 }
 

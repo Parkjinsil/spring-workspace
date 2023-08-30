@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	회원 조회에 실패했습니다.
 </body>
 </html>

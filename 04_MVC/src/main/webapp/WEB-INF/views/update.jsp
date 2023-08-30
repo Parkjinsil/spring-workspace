@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>정보수정</h2>
+	<form action="updateMember" method="post">
+		아이디 : <input type="text" name="id" value="${vo.id}" readonly><br>
+		비밀번호 : <input type="password" name="pwd" value="${vo.pwd}"><br>
+		이름 : <input type="text" name="name" value="${vo.name}"><br>
+		주소 : <input type="text" name="addr" value="${vo.addr}"><br>
+		<input type="submit" value="수정">
+	</form>
 </body>
 </html>

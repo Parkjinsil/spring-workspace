@@ -22,7 +22,7 @@ public class MemberService {
 		return dao.showAllMember();
 	}
 	
-	public Member findMember(String keyword) {
+	public List<Member> findMember(String keyword) {
 		return dao.findMember(keyword);
 	}
 	

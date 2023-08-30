@@ -27,12 +27,19 @@
 	<select id="findMember" parameterType="String" resultMap="memberMap">
 		SELECT *
 		FROM MEMBER
-		WHERE 
+		<where>
+			<if test="keyword !=null">
+				id LIKE '%'||#{keyword}||'%'
+				OR name LIKE '%'||#{keyword}||'%'
+				OR address LIKE '%'||#{keyword}||'%'
+			</if>
+		</where>
 	</select>
 	
-	<update id="updateMember" parameterType="Member" resultMap="memberMap">
+	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER
-		
+		SET password=#{pwd}, name=#{name}, address=#{addr}
+	 	WHERE id=#{id}
 	</update>
 	
 

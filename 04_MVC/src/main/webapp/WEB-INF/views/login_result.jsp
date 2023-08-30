@@ -20,7 +20,7 @@
 		</c:when>
 		<c:otherwise>
 			<h3>로그인 실패.. </h3>
-			<a href="login.jsp">로그인 하러 가기</a>
+			<a href="login">로그인 하러 가기</a>
 		</c:otherwise>
 	</c:choose>
 </body>
