@@ -32,7 +32,8 @@ pageEncoding="UTF-8"%>
         <div class="form-group">
             <label for="content">Content</label>
             <textarea name="content" id="content" cols="30" rows="10" class="form-control" style="resize: none;" readonly>${vo.content}</textarea>
-        	<a href="/board/download?filename=${fn:replace(vo.url, '/upload/', '')}"><img src="${vo.url}"></a>
+			<!-- <a href="/board/download?filename=${fn:replace(vo.url, '/upload/', '')}"><img src="${vo.url}"/></a> -->
+        	<a href="${vo.url}" download><img src="${vo.url}"/></a>
         </div>
         <div class="form-group">
             <label for="writer">Writer</label>
